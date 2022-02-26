@@ -245,7 +245,6 @@ export class PublicService {
                              <span style="font-weight: 400"
                                   >Program of events schedule available <a href="https://fragrance.org" target="_blank">@fragrance.org</a></span
                                 >
-                              >
                             </p>
                             <p>
                               <a href="https://fragranceday.org/live/2" target="_blank" data-saferedirecturl=""
@@ -262,7 +261,7 @@ export class PublicService {
                             </p>
                             <p>
                             <span style="font-weight: 400">
-                            #FragranceDay</a> <a href="https://www.instagram.com/fragrancefoundation/?hl=en">#FragranceForwardTFF</a> <a href="https://www.instagram.com/fragrancefoundation/?hl=en">@fragrancefoundation</a>
+                            <a href="https://www.instagram.com/fragrancefoundation/?hl=en">#FragranceDay</a> <a href="https://www.instagram.com/fragrancefoundation/?hl=en">#FragranceForwardTFF</a> <a href="https://www.instagram.com/fragrancefoundation/?hl=en">@fragrancefoundation</a>
                             </span>
                             </p>
                             <p>
