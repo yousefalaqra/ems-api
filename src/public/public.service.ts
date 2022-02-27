@@ -139,8 +139,8 @@ export class PublicService {
                               <img
                                 style="text-align: center"
                                 src="https://api.fragranceday.com/storage/imgs/left.png"
-                                alt=""
-                                width="300"
+                                alt=""                              
+                                height="180"
                                 class="CToWUd a6T"
                                 tabindex="0"
                               />
@@ -148,7 +148,7 @@ export class PublicService {
                                 style="text-align: center"
                                 src="https://api.fragranceday.com/storage/imgs/right.png"
                                 alt=""
-                                width="200"
+                                height="180"
                                 class="CToWUd a6T"
                                 tabindex="0"
                               />
