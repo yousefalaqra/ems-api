@@ -220,7 +220,7 @@ export class PublicService {
                             </p>
 
                             <p>
-                              <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Registration%20Confirmation%20for%20The%20Fragrance%20Foundation%E2%80%99s%20Fragrance%20Day%202022%20Virtual%20Event&dates=20220321T170000Z/20220321T220000Z&details=Registration%20Confirmation%20for%20The%20Fragrance%20Foundation%E2%80%99s%20Fragrance%20Day%202022%20Virtual%20Event%0D%0A%3Ca%20href%3D%22https%3A%2F%2Ffragranceday.org%2Flive%2F2%22%3ELIVE%20EVENT%20WEBCAST%3C%2Fa%3E&location=TFF&trp=true&sf=true&output=xml#f" target="_blank"
+                              <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Registration%20Confirmation%20for%20The%20Fragrance%20Foundation%E2%80%99s%20Fragrance%20Day%202022%20Virtual%20Event&dates=20220321T160000Z/20220321T210000Z&details=Registration%20Confirmation%20for%20The%20Fragrance%20Foundation%E2%80%99s%20Fragrance%20Day%202022%20Virtual%20Event%0D%0A%3Ca%20href%3D%22https%3A%2F%2Ffragranceday.org%2Flive%2F2%22%3ELIVE%20EVENT%20WEBCAST%3C%2Fa%3E&location=TFF&trp=true&sf=true&output=xml#f" target="_blank"
                                 ><span style="font-weight: 400"
                                   >Google Calendar</span
                                 ></a
