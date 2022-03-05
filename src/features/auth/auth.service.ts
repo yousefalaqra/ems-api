@@ -26,4 +26,12 @@ export class AuthService {
     };
   }
 
+  async register(user: any) {
+    return this._usersService.create(user);
+  }
+
+  async me(user: any) { 
+    return user;
+  }
+  
 }
