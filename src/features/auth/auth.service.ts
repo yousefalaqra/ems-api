@@ -33,5 +33,9 @@ export class AuthService {
   async me(user: any) { 
     return user;
   }
+
+  async getAllUsers() {
+    return this._usersService.getAllUsers();
+  }
   
 }

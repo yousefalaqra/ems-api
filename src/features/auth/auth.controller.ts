@@ -31,4 +31,9 @@ export class AuthController {
     return res.send('hello world!');
   }
 
+  @Get('users')
+  async getAllUsers() {
+    return await this._authService.getAllUsers();
+  }
+
 }

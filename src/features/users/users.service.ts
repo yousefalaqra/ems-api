@@ -18,4 +18,8 @@ export class UsersService {
     return this._userRepository.save(user);
   }
 
+  async getAllUsers(): Promise<UserEntity[]> {
+    return this._userRepository.find();
+  }
+
 }
