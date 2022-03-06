@@ -19,18 +19,6 @@ export class AuthController {
     return this._authService.register(req.body);
   }
 
-  @Get('me')
-  async me(@Request() req) {
-    return console.log(req.user);
-    ;
-  }
-
-
-  @Get('hello')
-  async hello(@Response() res) {
-    return res.send('hello world!');
-  }
-
   @Get('users')
   async getAllUsers() {
     return await this._authService.getAllUsers();
