@@ -11,6 +11,9 @@ import { RoleModule } from './features/roles/role.module';
 import { UserRoleModule } from './features/userRole/userRole.module';
 import { UserTeamModule } from './features/userTeam/userTeam.module';
 import { TeamModule } from './features/teams/team.module';
+import { OrganizationModule } from './features/organization/organization.module';
+import { IndustryModule } from './features/industry/industry.module';
+
 import {ConfigModule} from '@nestjs/config'
 import { PublicModule } from './public/public.module';
 
@@ -52,6 +55,8 @@ import { PublicModule } from './public/public.module';
     UserRoleModule,
     UserTeamModule,
     TeamModule,
+    OrganizationModule,
+    IndustryModule,
     PublicModule
   ],
   controllers: [AppController],
