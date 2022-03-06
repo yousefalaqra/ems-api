@@ -1,5 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, OneToOne } from 'typeorm';
 import { EntryEntity } from './entry.entity';
+import { VirtualEvent } from './virtualEvent.entity';
 @Entity()
 export class EventEntity {
   @PrimaryGeneratedColumn()
@@ -34,4 +35,7 @@ export class EventEntity {
 
   @OneToMany(() => EntryEntity, (entry) => entry.event)
   entries: Array<EntryEntity>;
+
+  @OneToOne(() => VirtualEvent, (virtual) => virtual.eventRel)
+  virtuals: VirtualEvent;
 }
