@@ -4,7 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { EventsController } from './controllers/events.controller';
 import { EntryEntity } from './entities/entry.entity';
 import { EventEntity } from './entities/event.entity';
-import { VirtualEvent } from './entities/virtualEvent.entity';
+import { VirtualEvent } from './entities/virtual-event.entity';
 import { EventsService } from './services/events.service';
 
 @Module({

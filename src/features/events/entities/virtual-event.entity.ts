@@ -1,14 +1,12 @@
 import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { EventEntity } from "./event.entity";
+import { EventType } from "../enums/event-type.enum";
 
-export enum EventType {
-    zoom
-}
 
 @Entity()
 export class VirtualEvent {
     @PrimaryGeneratedColumn()
-    virtual_id: number;
+    id: number;
 
     @Column()
     src: string;
@@ -17,8 +15,8 @@ export class VirtualEvent {
     type: EventType;
 
     @Column()
-    event_id: number;
+    eventId: number;
 
-    @OneToOne(() => EventEntity, eventRel => eventRel.virtuals)
-    eventRel: EventEntity;
+    @OneToOne(() => EventEntity, event => event.virtual)
+    event: EventEntity;
 }
