@@ -1,17 +1,25 @@
 import { Entity, Column, PrimaryGeneratedColumn,CreateDateColumn, OneToMany } from 'typeorm';
+import {UserRoleEntity} from '../../userRole/entities/userRole.entity';
 @Entity()
 export class UserEntity {
+
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  name: string;
-
+  userId: string;
+  
   @Column()
   username: string;
 
   @Column()
-  password: string;
+  email: string;
+
+  @Column()
+  passwordHash: string;
+
+  @Column()
+  passwordSalt: string;
 
   @Column()
   @CreateDateColumn()
@@ -19,4 +27,8 @@ export class UserEntity {
 
   @Column()
   updDate: Date;
+
+  @OneToMany(() => UserRoleEntity, userRole => userRole.user)
+  userRoles: UserRoleEntity[];
+
 }

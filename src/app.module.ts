@@ -7,6 +7,8 @@ import { AppService } from './app.service';
 import { EventsModule } from './features/events/events.module';
 import { AuthModule } from './features/auth/auth.module';
 import { UsersModule } from './features/users/users.module';
+import { RoleModule } from './features/roles/role.module';
+import { UserRoleModule } from './features/userRole/userRole.module';
 import {ConfigModule} from '@nestjs/config'
 import { PublicModule } from './public/public.module';
 
@@ -44,6 +46,8 @@ import { PublicModule } from './public/public.module';
     AuthModule,
     UsersModule,
     EventsModule,
+    RoleModule,
+    UserRoleModule,
     PublicModule
   ],
   controllers: [AppController],
