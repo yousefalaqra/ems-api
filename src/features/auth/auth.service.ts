@@ -27,9 +27,6 @@ export class AuthService {
   }
 
   async createUser(user: any) {
-    let object = await this._usersService.hashPassword(user.password);
-    user.passwordHash = object.hashPassword;
-    user.salt = object.salt;
     return this._usersService.create(user);
   }
 

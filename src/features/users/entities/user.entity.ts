@@ -1,7 +1,8 @@
-import { Entity, Column, PrimaryGeneratedColumn,CreateDateColumn, OneToMany } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn,CreateDateColumn, OneToMany, BeforeInsert } from 'typeorm';
 import {UserRoleEntity} from '../../userRole/entities/userRole.entity';
 import { UserTeamEntity } from '../../userTeam/entities/userTeam.entity';
 import * as uuid from "uuid";
+import * as bcrypt from "bcrypt";
 @Entity()
 export class UserEntity {
 
@@ -36,4 +37,10 @@ export class UserEntity {
   @OneToMany(() => UserTeamEntity, userTeam => userTeam.user)
   userTeams: UserTeamEntity[];
   
+  @BeforeInsert()
+  async hashPassword() {
+    let salt = await bcrypt.genSalt();
+    this.passwordHash = await bcrypt.hash(this.passwordHash,salt );
+    this.passwordSalt = salt;
+  }
 }
