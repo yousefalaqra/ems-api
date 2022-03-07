@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { OrganizationEntity } from './entities/organization.entity';
+import { OrganizationModel } from './models/organization.model';
 
 @Injectable()
 export class OrganizationService {
@@ -18,8 +19,16 @@ export class OrganizationService {
         return this._organizationRepository.findOne(id);
     }
 
-    async create(organization: OrganizationEntity): Promise<OrganizationEntity> {
-        return this._organizationRepository.save(organization);
+    async create(model: OrganizationModel): Promise<OrganizationModel> {
+        let entity={
+            name:model.name
+        }as OrganizationEntity
+
+        // let entity2:OrganizationEntity={
+        //     name:model.name
+        // }
+        
+        return this._organizationRepository.save(entity);
     }
     
 

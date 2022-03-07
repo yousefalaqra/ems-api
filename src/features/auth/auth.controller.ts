@@ -24,9 +24,4 @@ export class AuthController {
     return await this._authService.getAllUsers();
   }
 
-  @Post('CreateOrganization')
-  async createOrganization(@Request() req) {
-    return this._authService.createOrganization(req.body);
-  }
-
 }
