@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToMany, ManyToOne } from 'typeorm';
-import {UserRoleEntity} from '../../userRole/entities/userRole.entity';
+
 import * as uuid from "uuid";
 @Entity()
 export class RoleEntity {
@@ -13,7 +13,5 @@ export class RoleEntity {
     @Column()
     roleName: string;
 
-    @OneToMany(() => UserRoleEntity, userRole => userRole.role)
-    userRoles: UserRoleEntity[];
 
 }

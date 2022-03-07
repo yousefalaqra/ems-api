@@ -8,8 +8,6 @@ import { EventsModule } from './features/events/events.module';
 import { AuthModule } from './features/auth/auth.module';
 import { UsersModule } from './features/users/users.module';
 import { RoleModule } from './features/roles/role.module';
-import { UserRoleModule } from './features/userRole/userRole.module';
-import { UserTeamModule } from './features/userTeam/userTeam.module';
 import { TeamModule } from './features/teams/team.module';
 import { OrganizationModule } from './features/organization/organization.module';
 import { IndustryModule } from './features/industry/industry.module';
@@ -52,8 +50,6 @@ import { PublicModule } from './public/public.module';
     UsersModule,
     EventsModule,
     RoleModule,
-    UserRoleModule,
-    UserTeamModule,
     TeamModule,
     OrganizationModule,
     IndustryModule,

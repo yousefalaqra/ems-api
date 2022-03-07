@@ -1,8 +1,8 @@
-import { Entity, Column, PrimaryGeneratedColumn,CreateDateColumn, OneToMany, BeforeInsert } from 'typeorm';
-import {UserRoleEntity} from '../../userRole/entities/userRole.entity';
-import { UserTeamEntity } from '../../userTeam/entities/userTeam.entity';
+import { Entity, Column, PrimaryGeneratedColumn,CreateDateColumn, OneToMany, BeforeInsert, ManyToMany, JoinTable } from 'typeorm';
 import * as uuid from "uuid";
 import * as bcrypt from "bcrypt";
+import { RoleEntity } from 'src/features/roles/entities/role.entity';
+import { TeamEntity } from 'src/features/teams/entities/team.entity';
 @Entity()
 export class UserEntity {
 
@@ -31,12 +31,16 @@ export class UserEntity {
   @Column()
   updDate: Date;
 
-  @OneToMany(() => UserRoleEntity, userRole => userRole.user)
-  userRoles: UserRoleEntity[];
 
-  @OneToMany(() => UserTeamEntity, userTeam => userTeam.user)
-  userTeams: UserTeamEntity[];
-  
+
+  @ManyToMany(()=>RoleEntity)
+  @JoinTable()
+  userRoles:RoleEntity[]
+
+  @ManyToMany(()=>TeamEntity)
+  @JoinTable()
+  userTeams:TeamEntity[]
+
   @BeforeInsert()
   async hashPassword() {
     let salt = await bcrypt.genSalt();
