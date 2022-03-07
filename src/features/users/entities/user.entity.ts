@@ -1,13 +1,14 @@
 import { Entity, Column, PrimaryGeneratedColumn,CreateDateColumn, OneToMany } from 'typeorm';
 import {UserRoleEntity} from '../../userRole/entities/userRole.entity';
 import { UserTeamEntity } from '../../userTeam/entities/userTeam.entity';
+import * as uuid from "uuid";
 @Entity()
 export class UserEntity {
 
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({default: uuid.v4()})
   userId: string;
   
   @Column()

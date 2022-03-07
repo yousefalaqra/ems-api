@@ -14,10 +14,11 @@ export class AuthController {
     return this._authService.login(req.body);
   }
 
-  @Post('register')
-  async register(@Request() req) {
-    return this._authService.register(req.body);
+  @Post('createUser')
+  async createUser(@Request() req) {
+    return this._authService.createUser(req.body);
   }
+
 
   @Get('users')
   async getAllUsers() {

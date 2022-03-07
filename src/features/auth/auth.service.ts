@@ -3,7 +3,6 @@ import { JwtService } from '@nestjs/jwt';
 import { UsersService } from '../users/users.service';
 
 
-
 @Injectable()
 export class AuthService {
   constructor(
@@ -27,7 +26,10 @@ export class AuthService {
     };
   }
 
-  async register(user: any) {
+  async createUser(user: any) {
+    let object = await this._usersService.hashPassword(user.password);
+    user.passwordHash = object.hashPassword;
+    user.salt = object.salt;
     return this._usersService.create(user);
   }
 
@@ -38,5 +40,6 @@ export class AuthService {
   async getAllUsers() {
     return this._usersService.getAllUsers();
   }
+
   
 }
