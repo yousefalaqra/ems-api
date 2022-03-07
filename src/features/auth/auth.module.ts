@@ -7,9 +7,11 @@ import { AuthService } from './auth.service';
 import { jwtConstants } from './constants';
 import { JwtStrategy } from './jwt.strategy';
 import { LocalStrategy } from './local.strategy';
+import { OrganizationModule } from '../organization/organization.module';
 
 @Module({
   imports: [
+    OrganizationModule,
     UsersModule,
      PassportModule,
      JwtModule.register({

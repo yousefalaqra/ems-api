@@ -1,3 +1,4 @@
+import { OrganizationService } from '../organization/organization.service';
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from '../users/users.service';
@@ -6,6 +7,7 @@ import { UsersService } from '../users/users.service';
 @Injectable()
 export class AuthService {
   constructor(
+      private _organizationService: OrganizationService,
       private _usersService: UsersService,
       private _jwtService: JwtService
       ) {}
@@ -36,6 +38,10 @@ export class AuthService {
 
   async getAllUsers() {
     return this._usersService.getAllUsers();
+  }
+
+  async createOrganization(organization: any) {
+    return this._organizationService.create(organization);
   }
 
   

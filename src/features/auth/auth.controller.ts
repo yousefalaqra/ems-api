@@ -1,6 +1,5 @@
-import { Controller, Request,Response, Post, UseGuards, Get } from '@nestjs/common';
+import { Controller, Request, Post, UseGuards, Get } from '@nestjs/common';
 
-import { get } from 'http';
 import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './local-auth.guard';
 
@@ -23,6 +22,11 @@ export class AuthController {
   @Get('users')
   async getAllUsers() {
     return await this._authService.getAllUsers();
+  }
+
+  @Post('CreateOrganization')
+  async createOrganization(@Request() req) {
+    return this._authService.createOrganization(req.body);
   }
 
 }
