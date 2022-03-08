@@ -16,7 +16,9 @@ export class UsersService {
     return this._userRepository.findOne({ where: { username: username } });
   }
 
-  async create(model: UserModel): Promise<UserModel> {
+  async create(model: UserModel): Promise<any> {
+    let exist=await this._userRepository.findOne({where:{email:model.email}});
+    if(exist) return { status:false, message:"Email already exist" };
     let salt=await bcrypt.genSalt(10);
     let entity={
         email:model.email,
