@@ -14,6 +14,9 @@ export class OrganizationEntity {
     @Column()
     name: string;
 
+    @Column()
+    numberOfEmeployees: number;
+
     @OneToMany(() => IndustryEntity, industry => industry.organization)
     industries: IndustryEntity[];
 

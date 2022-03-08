@@ -1,7 +1,7 @@
 import { OrganizationService } from '../organization/organization.service';
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { UsersService } from '../users/users.service';
+import { UsersService } from '../users/user.service';
 
 
 @Injectable()
@@ -14,8 +14,8 @@ export class AuthService {
 
   async validateUser(username: string, pass: string): Promise<any> {
     const user = await this._usersService.findOne(username);
-    if (user && user.passwordHash === pass) {
-      const { passwordHash, ...result } = user;
+    if (user && user.password === pass) {
+      const { password, ...result } = user;
       return result;
     }
     return null;
@@ -27,11 +27,6 @@ export class AuthService {
       access_token: this._jwtService.sign(payload),
     };
   }
-
-  async createUser(user: any) {
-    return this._usersService.create(user);
-  }
-
   async me(user: any) { 
     return user;
   }
@@ -39,10 +34,5 @@ export class AuthService {
   async getAllUsers() {
     return this._usersService.getAllUsers();
   }
-
-  async createOrganization(organization: any) {
-    return this._organizationService.create(organization);
-  }
-
-  
+ 
 }

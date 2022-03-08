@@ -13,15 +13,4 @@ export class AuthController {
     return this._authService.login(req.body);
   }
 
-  @Post('createUser')
-  async createUser(@Request() req) {
-    return this._authService.createUser(req.body);
-  }
-
-
-  @Get('users')
-  async getAllUsers() {
-    return await this._authService.getAllUsers();
-  }
-
 }

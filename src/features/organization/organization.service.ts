@@ -21,7 +21,8 @@ export class OrganizationService {
 
     async create(model: OrganizationModel): Promise<OrganizationModel> {
         let entity={
-            name:model.name
+            name:model.name,
+            numberOfEmeployees:model.numberOfEmeployees,
         }as OrganizationEntity
 
         // let entity2:OrganizationEntity={

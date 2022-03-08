@@ -1,6 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn,CreateDateColumn, OneToMany, BeforeInsert, ManyToMany, JoinTable } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn,CreateDateColumn, ManyToMany, JoinTable, UpdateDateColumn } from 'typeorm';
 import * as uuid from "uuid";
-import * as bcrypt from "bcrypt";
 import { RoleEntity } from 'src/features/roles/entities/role.entity';
 import { TeamEntity } from 'src/features/teams/entities/team.entity';
 @Entity()
@@ -19,7 +18,7 @@ export class UserEntity {
   email: string;
 
   @Column()
-  passwordHash: string;
+  password: string;
 
   @Column()
   passwordSalt: string;
@@ -29,6 +28,7 @@ export class UserEntity {
   crtDate: Date;
 
   @Column()
+  @UpdateDateColumn()
   updDate: Date;
 
 
@@ -41,10 +41,4 @@ export class UserEntity {
   @JoinTable()
   userTeams:TeamEntity[]
 
-  @BeforeInsert()
-  async hashPassword() {
-    let salt = await bcrypt.genSalt();
-    this.passwordHash = await bcrypt.hash(this.passwordHash,salt );
-    this.passwordSalt = salt;
-  }
 }
