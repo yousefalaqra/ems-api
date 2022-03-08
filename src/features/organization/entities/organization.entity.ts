@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToMany, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { IndustryEntity } from '../../industry/entities/industry.entity';
 import { TeamEntity } from '../../teams/entities/team.entity';
 import * as uuid from "uuid";

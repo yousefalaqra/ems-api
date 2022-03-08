@@ -1,4 +1,4 @@
-import {Entity,PrimaryGeneratedColumn, Column, OneToMany,ManyToOne} from 'typeorm';
+import {Entity,PrimaryGeneratedColumn, Column,ManyToOne} from 'typeorm';
 import {OrganizationEntity} from '../../organization/entities/organization.entity';
 import * as uuid from "uuid";
 @Entity()

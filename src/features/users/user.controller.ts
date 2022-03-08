@@ -1,4 +1,4 @@
-import { Body,Post,Controller, ValidationPipe, HttpStatus } from "@nestjs/common";
+import { Body,Post,Controller } from "@nestjs/common";
 import {UsersService} from "./user.service";
 import {UserModel} from "./models/user.model";
 import { SETTINGS } from "./user.utilis";
