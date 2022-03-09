@@ -16,6 +16,9 @@ import { parseAsync } from 'json2csv';
 
 import * as fs from 'fs';
 import { promisify } from 'util';
+import { VirtualEvent } from '../entities/virtual-event.entity';
+import { VirtualEventModel } from '../models/virtual-event.model';
+
 
 @Injectable()
 export class EventsService {
@@ -24,6 +27,8 @@ export class EventsService {
     private _eventRepository: Repository<EventEntity>,
     @InjectRepository(EntryEntity)
     private _entryRepository: Repository<EntryEntity>,
+    @InjectRepository(VirtualEvent)
+    private _virtualRepository: Repository<VirtualEvent>
   ) {}
 
   async create(model: EventModel): Promise<EventEntity> {
@@ -55,6 +60,25 @@ export class EventsService {
       { id: id } as FindConditions<EventEntity>,
       entity,
     );
+  }
+
+  async upsert(id: number, model: VirtualEventModel){
+    let entity = {
+      src: model.src,
+      type: model.type
+    } as VirtualEvent;
+    let isExist = await this._virtualRepository.findOne({ where: {id : id}});
+    if(isExist != null) {
+      return this._virtualRepository.update({ id: id } as FindConditions<VirtualEvent>, entity)
+    } else {
+      let createdEntity = this._virtualRepository.create(entity);
+      await this._virtualRepository.save(createdEntity);
+      return createdEntity;
+    }      
+  }
+
+  showVirtualEvent(id: number) {
+    return this._virtualRepository.findOne({where:{id: id}});
   }
 
   async updateEventImage(

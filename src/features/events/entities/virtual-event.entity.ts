@@ -14,7 +14,7 @@ export class VirtualEvent {
     @Column()
     type: EventType;
 
-    @Column()
+    @Column({ default: null })
     eventId: number;
 
     @OneToOne(() => EventEntity, event => event.virtual)

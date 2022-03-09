@@ -18,6 +18,7 @@ import { EventEntity } from '../entities/event.entity';
 import { EventModel } from '../models/event.model';
 import { EventsService } from '../services/events.service';
 import { diskStorage } from 'multer';
+import { VirtualEventModel } from '../models/virtual-event.model';
 
 import { editFileName } from '../upload-img';
 @Controller('/api/v1/events')
@@ -86,5 +87,21 @@ export class EventsController {
     return this._eventsService.delete(id);
   }
 
+  @UseGuards(JwtAuthGuard)
+  @Put('virtual/:id')
+  upsert(
+    @Param('id') id: number,
+    @Body() model: VirtualEventModel
+  ) {
+    return this._eventsService.upsert(id, model);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('virtual/:id')
+  showVirtualEvent(
+    @Param('id') id: number
+  ) {
+    return this._eventsService.showVirtualEvent(id);
+  }
  
 }
