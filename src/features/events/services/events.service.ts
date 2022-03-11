@@ -1,16 +1,13 @@
-import { MailerService } from '@nestjs-modules/mailer';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import {
   DeleteResult,
   FindConditions,
-  InsertResult,
   Repository,
   UpdateResult,
 } from 'typeorm';
 import { EntryEntity } from '../entities/entry.entity';
 import { EventEntity } from '../entities/event.entity';
-import { EntryModel } from '../models/entry.model';
 import { EventModel } from '../models/event.model';
 import { parseAsync } from 'json2csv';
 

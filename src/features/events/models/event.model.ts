@@ -11,7 +11,7 @@ export class EventModel {
 
   endTime: Date;
 
-  src: string;
+  src: string; // required data for youtube | vimeo | zoom source
 
   img: string;
 }
