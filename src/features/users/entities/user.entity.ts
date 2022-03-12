@@ -23,8 +23,8 @@ export class UserEntity {
   @Column()
   passwordSalt: string;
 
-  @Column({default: "pending"})
-  status: string;
+  @Column({default: 0})
+  status: number;
 
   @Column()
   confirmationCode: string;

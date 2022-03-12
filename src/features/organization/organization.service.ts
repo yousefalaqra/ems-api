@@ -12,11 +12,15 @@ export class OrganizationService {
     ){}
     
     async findAll(): Promise<OrganizationEntity[]> {
-        return this._organizationRepository.find();
+        return await this._organizationRepository.find();
     }
     
-    async findOne(id: number): Promise<OrganizationEntity | undefined> {
-        return this._organizationRepository.findOne(id);
+    async findOne(id: number): Promise<OrganizationEntity> {
+        try{
+            return await this._organizationRepository.findOneOrFail(id);
+        }catch(error){
+            throw new Error('Organization not found');
+        }
     }
 
     async create(model: OrganizationModel): Promise<OrganizationModel> {
@@ -24,12 +28,7 @@ export class OrganizationService {
             name:model.name,
             numberOfEmeployees:model.numberOfEmeployees,
         }as OrganizationEntity
-
-        // let entity2:OrganizationEntity={
-        //     name:model.name
-        // }
-        
-        return this._organizationRepository.save(entity);
+        return await this._organizationRepository.save(entity);
     }
     
 

@@ -13,15 +13,19 @@ export class TeamService {
     ){}
 
     async findAll(): Promise<TeamEntity[]> {
-        return this._teamRepository.find();
+        return await this._teamRepository.find();
     }
 
-    async findOne(id: number): Promise<TeamEntity | undefined> {
-        return this._teamRepository.findOne(id);
+    async findOne(id: number): Promise<TeamEntity> {
+        try{
+            return await this._teamRepository.findOneOrFail(id);
+        }catch(error){
+            throw new Error('Team not found');
+        }
     }
 
     async create(team: TeamEntity): Promise<TeamEntity> {
-        return this._teamRepository.save(team);
+        return await this._teamRepository.save(team);
     }
 
 

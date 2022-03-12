@@ -11,7 +11,7 @@ export class RoleEntity {
     roleId: string;
 
     @Column()
-    roleName: string;
+    name: string;
 
 
 }

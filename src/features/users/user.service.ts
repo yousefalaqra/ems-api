@@ -16,8 +16,12 @@ export class UsersService {
     private readonly _mailerService: MailerService,
   ) {}
 
-  async findOne(username: string): Promise<UserEntity | undefined> {
-    return this._userRepository.findOne({ where: { username: username } });
+  async findOne(username: string): Promise<UserEntity> {
+    try{
+      return await this._userRepository.findOneOrFail({where:{username:username}});
+    }catch(error){
+      throw new Error('User not found');
+    }
   }
 
   async create(model: UserModel): Promise<any> {
@@ -39,7 +43,7 @@ export class UsersService {
     };
   }
   async getAllUsers(): Promise<UserEntity[]> {
-    return this._userRepository.find();
+    return await this._userRepository.find();
   }
 
   async sendMail(email: string,code :string) {
@@ -60,8 +64,8 @@ export class UsersService {
 
   async confirmEmail(code:string):Promise<any>{
     let user=await this._userRepository.findOne({where:{confirmationCode:code}});
-    if(!user) return {status:false,message:"User not found"};
-    user.status="active";
+    if(!user) throw new Error("User not found");
+    user.status=1;
     user.confirmationCode=null;
     this._userRepository.save(user);
     return {status:true,message:"User verified successfully"};
@@ -69,7 +73,7 @@ export class UsersService {
 
   async getUserStatus(username:string):Promise<any>{
     let user=await this._userRepository.findOne({where:{username:username}});
-    if(!user) return {status:false,message:"User not found"};
+    if(!user) throw new Error("User not found");
     return {message: user.status };
   }
 }

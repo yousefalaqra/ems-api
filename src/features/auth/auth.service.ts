@@ -17,12 +17,12 @@ export class AuthService {
       const { password, ...result } = user;
       return result;
     }
-    return null;
+    throw new Error('Username or password is incorrect');
   }
 
   async login(user: any) {
-    let obj = await this._usersService.getUserStatus(user.username);
-    if (obj.message === 'active') {
+    let status = await this._usersService.getUserStatus(user.username);
+    if (status.message == 1) {
       const payload = { username: user.username, sub: user.userId };
       return {
         access_token: this._jwtService.sign(payload),
