@@ -23,6 +23,12 @@ export class UserEntity {
   @Column()
   passwordSalt: string;
 
+  @Column({default: "pending"})
+  status: string;
+
+  @Column()
+  confirmationCode: string;
+
   @Column()
   @CreateDateColumn()
   crtDate: Date;
@@ -30,8 +36,6 @@ export class UserEntity {
   @Column()
   @UpdateDateColumn()
   updDate: Date;
-
-
 
   @ManyToMany(()=>RoleEntity)
   @JoinTable()

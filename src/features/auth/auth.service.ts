@@ -21,13 +21,14 @@ export class AuthService {
   }
 
   async login(user: any) {
-    const payload = { username: user.username, sub: user.userId };
-    return {
-      access_token: this._jwtService.sign(payload),
-    };
-  }
-  async me(user: any) { 
-    return user;
+    let obj = await this._usersService.getUserStatus(user.username);
+    if (obj.message === 'active') {
+      const payload = { username: user.username, sub: user.userId };
+      return {
+        access_token: this._jwtService.sign(payload),
+      };
+    }
+    return { status: false, message: 'User not verified, please verify your email' };
   }
 
   async getAllUsers() {

@@ -11,7 +11,6 @@ import { RoleModule } from './features/roles/role.module';
 import { TeamModule } from './features/teams/team.module';
 import { OrganizationModule } from './features/organization/organization.module';
 import { IndustryModule } from './features/industry/industry.module';
-
 import {ConfigModule} from '@nestjs/config'
 import { PublicModule } from './public/public.module';
 
@@ -31,19 +30,14 @@ import { PublicModule } from './public/public.module';
       autoLoadEntities: true,
       synchronize: true,
     }),
-
-
     MailerModule.forRoot({
       transport: {
-        host: 'smtp.gmail.com',
-        port: 465,
-        secure: true,
+        service: 'gmail',
         auth: {
-          type: 'OAuth2',
           user: process.env.EMAIL_USER,
-          serviceClient: process.env.EMAIL_CLIENT_ID,
-          privateKey: process.env.EMAIL_PRIVATE_KEY
+          pass: process.env.EMAIL_PASSWORD,
         },
+
       },
     }),
     AuthModule,
