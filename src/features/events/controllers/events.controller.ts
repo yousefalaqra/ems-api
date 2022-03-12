@@ -89,11 +89,11 @@ export class EventsController {
 
   @UseGuards(JwtAuthGuard)
   @Put('virtual/:id')
-  upsert(
+  upsertVirtual(
     @Param('id') id: number,
     @Body() model: VirtualEventModel
   ) {
-    return this._eventsService.upsert(id, model);
+    return this._eventsService.upsertVirtual(id, model);
   }
 
   @UseGuards(JwtAuthGuard)

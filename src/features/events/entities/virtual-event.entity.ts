@@ -4,7 +4,7 @@ import { EventType } from "../enums/event-type.enum";
 
 
 @Entity()
-export class VirtualEvent {
+export class VirtualEventEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
