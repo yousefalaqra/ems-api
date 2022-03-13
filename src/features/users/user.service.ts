@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UserEntity } from './entities/user.entity';
@@ -17,16 +17,14 @@ export class UsersService {
   ) {}
 
   async findOne(username: string): Promise<UserEntity> {
-    try{
-      return await this._userRepository.findOneOrFail({where:{username:username}});
-    }catch(error){
-      throw new Error('User not found');
-    }
+    let user= await this._userRepository.findOneOrFail({where:{username:username}});
+    if(!user) throw new NotFoundException(`User ${username} not found`);
+    return user;
   }
 
   async create(model: UserModel): Promise<any> {
     let exist=await this._userRepository.findOne({where:{email:model.email}});
-    if(exist) return { status:false, message:"Email already exist" };
+    if(exist) throw new HttpException(`User with email ${model.email} already exist`,HttpStatus.BAD_REQUEST);
     let code=uuid.v4();
     let salt=await bcrypt.genSalt(10);
     let entity={
@@ -37,10 +35,7 @@ export class UsersService {
     }as UserEntity
     this.sendMail(model.email,code);
     this._userRepository.save(entity)
-    return {
-        status:true,
-        message:"User created successfully, please check your email to verify your account",
-    };
+    throw new HttpException(`User with email ${model.email} created successfully, please check your email`,HttpStatus.CREATED);
   }
   async getAllUsers(): Promise<UserEntity[]> {
     return await this._userRepository.find();
@@ -58,22 +53,24 @@ export class UsersService {
     }).then(() => {
       console.log('Email sent!');
     }).catch((err) => {
-      console.log('Error sending email: ', err);
+      console.log(err);
+      
     })
   }
 
   async confirmEmail(code:string):Promise<any>{
     let user=await this._userRepository.findOne({where:{confirmationCode:code}});
-    if(!user) throw new Error("User not found");
+    if(!user) throw new NotFoundException(`User ${code} not found`);
     user.status=1;
     user.confirmationCode=null;
     this._userRepository.save(user);
-    return {status:true,message:"User verified successfully"};
+    //return {status:true,message:"User verified successfully"};
+    throw new HttpException(`User ${user.username} verified successfully`,HttpStatus.OK);
   }
 
   async getUserStatus(username:string):Promise<any>{
     let user=await this._userRepository.findOne({where:{username:username}});
-    if(!user) throw new Error("User not found");
+    if(!user) throw new NotFoundException(`User ${username} not found`);
     return {message: user.status };
   }
 }

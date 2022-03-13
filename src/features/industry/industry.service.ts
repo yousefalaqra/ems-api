@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { IndustryEntity } from './entities/industry.entity';
@@ -16,11 +16,9 @@ export class IndustryService {
     }
 
     async findOne(id: number): Promise<IndustryEntity> {
-        try{
-            return await this._industryRepository.findOneOrFail(id);
-        }catch(error){
-            throw new Error('Industry not found');
-        }
+        let industry = await this._industryRepository.findOneOrFail(id);
+        if (!industry) throw new NotFoundException(`Industry with id ${id} not found`);
+        return industry;
     }
 
     async create(model: IndustryModel): Promise<IndustryModel> {

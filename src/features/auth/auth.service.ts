@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from '../users/user.service';
 import * as bcrypt from 'bcrypt';
@@ -17,7 +17,7 @@ export class AuthService {
       const { password, ...result } = user;
       return result;
     }
-    throw new Error('Username or password is incorrect');
+    throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED);
   }
 
   async login(user: any) {
@@ -28,7 +28,8 @@ export class AuthService {
         access_token: this._jwtService.sign(payload),
       };
     }
-    return { status: false, message: 'User not verified, please verify your email' };
+    //return { status: false, message: 'User not verified, please verify your email' };
+    throw new HttpException('User not verified, please verify your email', HttpStatus.BAD_REQUEST);
   }
 
   async getAllUsers() {
