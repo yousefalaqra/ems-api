@@ -9,6 +9,7 @@ import * as uuid from "uuid";
 
 @Injectable()
 export class UsersService {
+  
   constructor(
 
     @InjectRepository(UserEntity)
@@ -57,11 +58,12 @@ export class UsersService {
       
     })
   }
-
+  
+  VERIFIED_USER=1;
   async confirmEmail(code:string):Promise<any>{
     let user=await this._userRepository.findOne({where:{confirmationCode:code}});
     if(!user) throw new NotFoundException(`User ${code} not found`);
-    user.status=1;
+    user.status=this.VERIFIED_USER;
     user.confirmationCode=null;
     this._userRepository.save(user);
     //return {status:true,message:"User verified successfully"};

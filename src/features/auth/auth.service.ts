@@ -22,7 +22,7 @@ export class AuthService {
 
   async login(user: any) {
     let status = await this._usersService.getUserStatus(user.username);
-    if (status.message == 1) {
+    if (status.message == this._usersService.VERIFIED_USER) {
       const payload = { username: user.username, sub: user.userId };
       return {
         access_token: this._jwtService.sign(payload),
