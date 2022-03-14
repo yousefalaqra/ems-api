@@ -1,7 +1,9 @@
+/* eslint-disable prettier/prettier */
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from '../users/user.service';
 import * as bcrypt from 'bcrypt';
+import UserStatus from '../users/enums/user-status.enum';
 
 
 @Injectable()
@@ -21,8 +23,8 @@ export class AuthService {
   }
 
   async login(user: any) {
-    let status = await this._usersService.getUserStatus(user.username);
-    if (status.message == this._usersService.VERIFIED_USER) {
+    const status = await this._usersService.getUserStatus(user.username);
+    if (status.message == UserStatus.VERIFIED) {
       const payload = { username: user.username, sub: user.userId };
       return {
         access_token: this._jwtService.sign(payload),

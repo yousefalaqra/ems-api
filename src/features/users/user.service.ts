@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -6,6 +7,8 @@ import { UserModel } from './models/user.model';
 import * as bcrypt from 'bcrypt';
 import { MailerService } from '@nestjs-modules/mailer';
 import * as uuid from "uuid";
+import UserStatus from './enums/user-status.enum';
+
 
 @Injectable()
 export class UsersService {
@@ -18,17 +21,17 @@ export class UsersService {
   ) {}
 
   async findOne(username: string): Promise<UserEntity> {
-    let user= await this._userRepository.findOneOrFail({where:{username:username}});
+    const user= await this._userRepository.findOneOrFail({where:{username:username}});
     if(!user) throw new NotFoundException(`User ${username} not found`);
     return user;
   }
 
   async create(model: UserModel): Promise<any> {
-    let exist=await this._userRepository.findOne({where:{email:model.email}});
+    const exist=await this._userRepository.findOne({where:{email:model.email}});
     if(exist) throw new HttpException(`User with email ${model.email} already exist`,HttpStatus.BAD_REQUEST);
-    let code=uuid.v4();
-    let salt=await bcrypt.genSalt(10);
-    let entity={
+    const code=uuid.v4();
+    const salt=await bcrypt.genSalt(10);
+    const entity={
         email:model.email,
         password:await bcrypt.hash(model.password,salt),
         passwordSalt:salt,
@@ -59,11 +62,11 @@ export class UsersService {
     })
   }
   
-  VERIFIED_USER=1;
+
   async confirmEmail(code:string):Promise<any>{
-    let user=await this._userRepository.findOne({where:{confirmationCode:code}});
+    const user=await this._userRepository.findOne({where:{confirmationCode:code}});
     if(!user) throw new NotFoundException(`User ${code} not found`);
-    user.status=this.VERIFIED_USER;
+    user.status=UserStatus.VERIFIED;
     user.confirmationCode=null;
     this._userRepository.save(user);
     //return {status:true,message:"User verified successfully"};
@@ -71,7 +74,7 @@ export class UsersService {
   }
 
   async getUserStatus(username:string):Promise<any>{
-    let user=await this._userRepository.findOne({where:{username:username}});
+    const user=await this._userRepository.findOne({where:{username:username}});
     if(!user) throw new NotFoundException(`User ${username} not found`);
     return {message: user.status };
   }
