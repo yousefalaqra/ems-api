@@ -7,7 +7,7 @@ import * as cors from 'cors';
 
 async function bootstrap() {
   // const appModule = await NestFactory.create(AppModule, { cors: true });
-
+  
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
     cors: true,
   });

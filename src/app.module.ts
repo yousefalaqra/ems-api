@@ -14,6 +14,8 @@ import { IndustryModule } from './features/industry/industry.module';
 import { ConfigModule } from '@nestjs/config';
 import { PublicModule } from './public/public.module';
 import { RegistrationModule } from './features/registration/registration.module';
+import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
+import { join } from 'path';
 
 @Module({
   imports: [
@@ -35,6 +37,13 @@ import { RegistrationModule } from './features/registration/registration.module'
         auth: {
           user: process.env.EMAIL_USER,
           pass: process.env.EMAIL_PASSWORD,
+        },
+      },
+      template: {
+        dir: join(__dirname, '..', 'email-templates'),
+        adapter: new HandlebarsAdapter(),
+        options: {
+          strict: true,
         },
       },
     }),
