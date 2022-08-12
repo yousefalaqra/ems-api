@@ -13,6 +13,7 @@ import { OrganizationModule } from './features/organization/organization.module'
 import { IndustryModule } from './features/industry/industry.module';
 import { ConfigModule } from '@nestjs/config';
 import { PublicModule } from './public/public.module';
+import { RegistrationModule } from './features/registration/registration.module';
 
 @Module({
   imports: [
@@ -44,6 +45,7 @@ import { PublicModule } from './public/public.module';
     TeamModule,
     OrganizationModule,
     IndustryModule,
+    RegistrationModule,
     PublicModule,
   ],
   controllers: [AppController],

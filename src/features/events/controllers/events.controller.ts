@@ -48,7 +48,7 @@ export class EventsController {
     return this._eventsService.exportEventEntries(id);
   }
 
-  //@UseGuards(JwtAuthGuard) // for testing
+  //@UseGuards(JwtAuthGuard) // for 
   @Post()
   create(@Body() model: EventModel): Promise<EventEntity> {
     console.log('objectL: ', model);
