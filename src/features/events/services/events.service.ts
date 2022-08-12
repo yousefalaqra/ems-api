@@ -29,6 +29,13 @@ export class EventsService {
   async create(model: EventModel): Promise<EventEntity> {
     let entity = {
       title: model.title,
+      description: model.description,
+      startTime: model.startTime,
+      endTime: model.endTime,
+      video: model.video,
+      isMain: model.isMain,
+      isPublished: model.isPublished,
+      img: model.img,
     } as EventEntity;
 
     console.log('objectL: ', entity);
@@ -46,7 +53,7 @@ export class EventsService {
       endTime: model.endTime,
       isMain: model.isMain,
       isPublished: model.isPublished,
-      src: model.src,
+      video: model.video,
       startTime: model.startTime,
       title: model.title,
     } as EventEntity;

@@ -26,7 +26,7 @@ export class EventsController {
 
   @UseGuards(JwtAuthGuard)
   @Get()
-  findAll(): Promise<Array<EventEntity>> {    
+  findAll(): Promise<Array<EventEntity>> {
     return this._eventsService.findAll();
   }
 
@@ -48,9 +48,10 @@ export class EventsController {
     return this._eventsService.exportEventEntries(id);
   }
 
-  @UseGuards(JwtAuthGuard)
+  //@UseGuards(JwtAuthGuard) // for testing
   @Post()
   create(@Body() model: EventModel): Promise<EventEntity> {
+    console.log('objectL: ', model);
     return this._eventsService.create(model);
   }
 
@@ -85,6 +86,4 @@ export class EventsController {
   delete(@Param('id') id: number): Promise<DeleteResult> {
     return this._eventsService.delete(id);
   }
-
- 
 }

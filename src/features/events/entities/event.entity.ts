@@ -24,7 +24,7 @@ export class EventEntity {
   endTime: Date;
 
   @Column({ default: '' })
-  src: string;
+  video: string;
 
   @Column({ default: '' })
   img: string;

@@ -11,7 +11,7 @@ export class EventModel {
 
   endTime: Date;
 
-  src: string;
-
   img: string;
+
+  video: string;
 }
